@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scoops & Smiles — Ice Cream Parlor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --pink:#ffd1dc;
+      --mint:#c7f0d8;
+      --lemon:#fff4b8;
+      --berry:#7c3aed;
+      --choco:#2e2a27;
+      --ink:#1f2937;
+      --muted:#6b7280;
+      --card:#ffffff;
+      --radius:22px;
+      --shadow:0 14px 40px rgba(31,41,55,.12),0 4px 14px rgba(31,41,55,.06);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--ink);
+      font-family:Poppins,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:linear-gradient(180deg,#fff 0%, var(--mint) 30%, #fff 60%, var(--pink) 100%);
+    }
+    /* Header */
+    .nav{position:sticky; top:0; z-index:50; backdrop-filter:saturate(1.2) blur(6px); background:rgba(255,255,255,.6); border-bottom:1px solid rgba(0,0,0,.05)}
+    .nav .wrap{max-width:1100px; margin:0 auto; padding:14px 20px; display:flex; align-items:center; justify-content:space-between;}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
+    .logo{width:38px; height:38px; border-radius:12px; background:conic-gradient(from 210deg at 50% 50%, var(--lemon), var(--mint), var(--pink)); display:grid; place-items:center; box-shadow:0 4px 10px rgba(0,0,0,.08)}
+    .logo svg{filter:drop-shadow(0 2px 0 rgba(0,0,0,.05))}
+    .nav a{color:var(--ink); text-decoration:none; font-weight:600}
+    .menu{display:flex; gap:18px; align-items:center}
+    .btn{appearance:none; border:none; border-radius:14px; padding:10px 14px; font-weight:700; cursor:pointer}
+    .btn-primary{background:var(--berry); color:white; box-shadow:0 8px 20px rgba(124,58,237,.25)}
+    .btn-outline{background:white; border:1px solid #e5e7eb}
+
+    /* Hero */
+    .hero{position:relative; overflow:hidden}
+    .hero .wrap{max-width:1100px; margin:0 auto; padding:56px 20px; display:grid; grid-template-columns:1.1fr .9fr; gap:30px; align-items:center}
+    .title{font-size:clamp(1.8rem, 3.2vw + 1rem, 3rem); line-height:1.1; margin:0 0 10px}
+    .subtitle{color:var(--muted); margin:0 0 18px}
+    .cta{display:flex; gap:12px; flex-wrap:wrap}
+    .cone{width:100%; aspect-ratio:1/1; border-radius:30px; background:radial-gradient(circle at 30% 30%, #fff, #ffe3ea 60%), url('https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1200&auto=format&fit=crop') center/cover; box-shadow:var(--shadow)}
+    @media (max-width:900px){.hero .wrap{grid-template-columns:1fr}}
+
+    /* Section shared */
+    section{padding:56px 20px}
+    .container{max-width:1100px; margin:0 auto}
+    h2{font-size:2rem; margin:0 0 18px}
+    .muted{color:var(--muted)}
+
+    /* Flavors */
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+    @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:560px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card); border-radius:20px; box-shadow:var(--shadow); overflow:hidden; border:1px solid rgba(0,0,0,.06)}
+    .card img{width:100%; height:180px; object-fit:cover}
+    .card .pad{padding:14px}
+    .chip{display:inline-block; padding:6px 10px; border-radius:999px; background:var(--lemon); font-size:.8rem; font-weight:700; margin-right:8px}
+    .price{font-weight:800}
+
+    /* Specials banner */
+    .banner{background:linear-gradient(135deg, var(--lemon), var(--mint)); border-radius:24px; padding:22px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; box-shadow:var(--shadow)}
+
+    /* About */
+    .about{display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:center}
+    .about img{width:100%; border-radius:24px; box-shadow:var(--shadow)}
+    @media (max-width:900px){.about{grid-template-columns:1fr}}
+
+    /* Footer */
+    footer{background:#111827; color:#e5e7eb}
+    footer .wrap{max-width:1100px; margin:0 auto; padding:28px 20px; display:grid; grid-template-columns:2fr 1fr 1fr; gap:20px}
+    footer a{color:#e5e7eb; text-decoration:none}
+    footer small{color:#9ca3af}
+    @media (max-width:900px){footer .wrap{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="wrap">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2e2a27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/>
+          </svg>
+        </div>
+        <span>Scoops & Smiles</span>
+      </div>
+      <nav class="menu">
+        <a href="#flavors">Flavors</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Order Now</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="wrap">
+      <div>
+        <h1 class="title">Handcrafted Ice Cream, <br/>Happiness in Every Scoop 🍦</h1>
+        <p class="subtitle">Fresh small‑batch gelato and classic scoops made with real fruit, dairy from local farms, and zero artificial colors.</p>
+        <div class="cta">
+          <button class="btn btn-primary" onclick="document.getElementById('flavors').scrollIntoView({behavior:'smooth'})">See Flavors</button>
+          <button class="btn btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Catering & Events</button>
+        </div>
+      </div>
+      <div class="cone" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- FLAVORS -->
+  <section id="flavors">
+    <div class="container">
+      <h2>Popular Flavors</h2>
+      <p class="muted">Rotate weekly — ask in‑store for seasonal specials.</p>
+      <div class="grid" style="margin-top:16px">
+        <!-- Card 1 -->
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=1200&auto=format&fit=crop" alt="Strawberry ice cream"/>
+          <div class="pad">
+            <span class="chip">Best Seller</span>
+            <h3>Strawberry Bliss</h3>
+            <p class="muted">Creamy dairy base with ripe strawberries and a hint of vanilla.</p>
+            <p class="price">₹99 / scoop</p>
+          </div>
+        </article>
+        <!-- Card 2 -->
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1456953180671-730de08edaa7?q=80&w=1200&auto=format&fit=crop" alt="Chocolate ice cream"/>
+          <div class="pad">
+            <h3>Dark Cocoa Crunch</h3>
+            <p class="muted">70% cocoa with cookie crumble. Rich, bold, unforgettable.</p>
+            <p class="price">₹109 / scoop</p>
+          </div>
+        </article>
+        <!-- Card 3 -->
+        <article class="card">
+          <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=1200&auto=format&fit=crop" alt="Pistachio ice cream"/>
+          <div class="pad">
+            <h3>Pistachio Praline</h3>
+            <p class="muted">Roasted pista with caramelized nut praline swirls.</p>
+            <p class="price">₹119 / scoop</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="banner" style="margin-top:20px">
+        <div>
+          <h3 style="margin:0 0 6px">Summer Combo — Any 3 scoops @ ₹279</h3>
+          <p class="muted" style="margin:0">Add waffle cone free this week!</p>
+        </div>
+        <button class="btn btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Grab the Deal</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container about">
+      <img src="https://images.unsplash.com/photo-1526312426976-593c2b9993b5?q=80&w=1200&auto=format&fit=crop" alt="Ice cream shop interior"/>
+      <div>
+        <h2>About Our Parlor</h2>
+        <p class="muted">Started by two friends who loved late‑night sundaes, Scoops & Smiles is your neighborhood nook for joyful treats. We churn fresh daily, source locally, and keep our menu fun with limited‑edition flavors.</p>
+        <ul style="line-height:1.9; padding-left:18px">
+          <li>Eggless options & vegan sorbets</li>
+          <li>Birthday cakes & party tubs</li>
+          <li>Custom catering for schools and offices</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / ORDER -->
+  <section id="contact">
+    <div class="container">
+      <h2>Visit or Order</h2>
+      <p class="muted">Open daily • 11:00 AM – 11:00 PM</p>
+      <div class="grid" style="margin-top:12px">
+        <div class="card" style="padding:0">
+          <div class="pad">
+            <h3>Store</h3>
+            <p>Shivaji Nagar, Pune<br/>Maharashtra 411005</p>
+            <p class="muted">Call: <a href="tel:+919999999999">+91 99999 99999</a></p>
+            <button class="btn btn-outline" onclick="alert('Directions (demo)')">Get Directions</button>
+          </div>
+        </div>
+        <div class="card" style="padding:0">
+          <div class="pad">
+            <h3>Quick Order</h3>
+            <form onsubmit="event.preventDefault(); alert('Thanks! This is a demo form.');">
+              <label>Flavor</label>
+              <select style="width:100%; padding:10px; border-radius:12px; border:1px solid #e5e7eb; margin-bottom:10px">
+                <option>Strawberry Bliss</option>
+                <option>Dark Cocoa Crunch</option>
+                <option>Pistachio Praline</option>
+              </select>
+              <label>Quantity</label>
+              <input type="number" min="1" value="1" style="width:100%; padding:10px; border-radius:12px; border:1px solid #e5e7eb; margin-bottom:10px" />
+              <button class="btn btn-primary" type="submit">Place Order</button>
+            </form>
+          </div>
+        </div>
+        <div class="card" style="padding:0">
+          <div class="pad">
+            <h3>Catering</h3>
+            <p class="muted">We bring a live sundae bar to your venue. Perfect for birthdays and weddings.</p>
+            <button class="btn btn-outline" onclick="alert('We\'ll contact you soon! (demo)')">Request a Quote</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrap">
+      <div>
+        <h3 style="margin:0 0 6px">Scoops & Smiles</h3>
+        <small>© <span id="year"></span> Scoops & Smiles. For educational demo only.</small>
+      </div>
+      <div>
+        <strong>Quick Links</strong><br/>
+        <a href="#flavors">Flavors</a><br/>
+        <a href="#about">About</a><br/>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <strong>Follow</strong><br/>
+        <a href="#">Instagram</a><br/>
+        <a href="#">Facebook</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
